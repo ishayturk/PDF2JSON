@@ -1,4 +1,3 @@
-
 # Project: PDF2JSON | מתווך בקליק | main.py
 import streamlit as st
 import pdfplumber
