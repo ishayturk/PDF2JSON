@@ -24,6 +24,12 @@ def convert_with_gemini(exam_text, answers_text):
     genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
     model = genai.GenerativeModel('gemini-2.0-flash')
     prompt = f"""להלן טקסט של בחינה רישיון מתווכים וקובץ תשובות.
+
+קובץ התשובות מכיל טבלה עם מספר גרסאות (גרסה 1, גרסה 2, גרסה 3, גרסה 4).
+השתמש אך ורק בגרסה 1 — העמודה הראשונה בטבלה.
+בטבלה: העמודה הראשונה היא מספר שאלה במסטר, ולידה בסוגריים התשובה הנכונה לגרסה 1.
+לדוגמה: "1 )ד(" — שאלה 1 בגרסה 1, תשובה נכונה ד.
+
 המשימה: הפק JSON תקני בדיוק במבנה הבא:
 
 {{
@@ -53,7 +59,7 @@ def convert_with_gemini(exam_text, answers_text):
 === טקסט הבחינה ===
 {exam_text}
 
-=== טקסט התשובות ===
+=== טקסט התשובות (השתמש בגרסה 1 בלבד) ===
 {answers_text}
 """
     for attempt in range(3):
