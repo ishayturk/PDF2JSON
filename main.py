@@ -64,7 +64,10 @@ def convert_with_gemini(exam_text, answers_text):
 """
     for attempt in range(3):
         try:
-            response = model.generate_content(prompt)
+            response = model.generate_content(
+                prompt,
+                generation_config=genai.GenerationConfig(max_output_tokens=8192)
+            )
             res_text = response.text.replace('```json', '').replace('```', '').strip()
             match = re.search(r'\{.*\}', res_text, re.DOTALL)
             if match:
