@@ -1,1 +1,2 @@
 pdfplumber
+google.generativeai as genai
